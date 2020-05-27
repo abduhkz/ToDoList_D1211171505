@@ -2,13 +2,12 @@ package id.ac.unhas.d121171505.todolist.database
 
 import android.app.Application
 import androidx.lifecycle.LiveData
-import com.zulfahmi.todolist.model.Todo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class Repository(application: Application){
-    private val todoDao: DAO?
+    private val todoDao: todoDAO?
     private var todos: LiveData<List<Todo>>? = null
 
     init{

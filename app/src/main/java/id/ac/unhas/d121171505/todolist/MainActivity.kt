@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
@@ -12,13 +11,15 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-
-import kotlinx.android.synthetic.main.activity_main.*
+import id.ac.unhas.d121171505.todolist.database.Todo
+import id.ac.unhas.d121171505.todolist.utilities.AlarmRec
+import id.ac.unhas.d121171505.todolist.utilities.Commons
+import id.ac.unhas.d121171505.todolist.utilities.FormDialog
 import kotlinx.android.synthetic.main.fragment_todo.view.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,9 +27,9 @@ class MainActivity : AppCompatActivity() {
         var isSortByDateCreated = true
     }
 
-    private lateinit var todoViewModel: TodoViewModel
+    private lateinit var todoViewModel: ViewModel
     private lateinit var todoAdapter: TodoAdapter
-    private lateinit var alarmReceiver: AlarmReceiver
+    private lateinit var alarmReceiver: AlarmRec
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
 
         recyclerview.adapter = todoAdapter
 
-        todoViewModel = ViewModelProvider(this).get(TodoViewModel::class.java)
+        todoViewModel = ViewModelProvider(this).get(ViewModel::class.java)
 
         swipe_refresh_layout.setOnRefreshListener {
             refreshData()
@@ -60,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             showInsertDialog()
         }
 
-        alarmReceiver = AlarmReceiver()
+        alarmReceiver = AlarmRec()
     }
 
     override fun onResume() {

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface DAO {
+interface todoDAO {
     @Query("SELECT * FROM todo_table")
     fun getTodos(): LiveData<List<Todo>>
 
